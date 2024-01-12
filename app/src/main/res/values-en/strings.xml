@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AndroidFundamentals</string>
+    <string name="loginBackgroundImage">A background image with the dragon ball characters</string>
+    <string name="exit">Log out</string>
+</resources>
