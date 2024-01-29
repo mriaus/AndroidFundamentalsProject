@@ -14,6 +14,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 class HeroesViewModel: ViewModel() {
 
@@ -50,7 +51,38 @@ class HeroesViewModel: ViewModel() {
          }
      }
 
+    fun selectHero(hero: Hero) {
+        heroList.forEach {
+            it.isSelected = false
+        }
+        hero.isSelected = true
+        _stateHeroes.value = StateHeroes.OnHeroSelected(hero)
+        _stateHeroes.value = StateHeroes.Idle
+        _stateHeroDetails.value = StateHeroDetails.OnHeroSelected(hero)
+    }
 
+    fun receiveDmg() {
+        heroList.firstOrNull() {
+            it.isSelected
+        }?.let {
+            it.currentHealth -= Random.nextInt(10,60)
+            updateHero(it)
+        }
+    }
+
+    fun heal(){
+        heroList.firstOrNull(){
+            it.isSelected
+        }?.let {
+            if(it.currentHealth + 20 > it.maxHealth){
+                it.currentHealth = 100
+            }else{
+                it.currentHealth += 20
+            }
+            updateHero(it)
+
+        }
+    }
     fun setHeroes(heroes: List<Hero>) {
         heroList.clear()
         heroList.addAll(heroes)

@@ -9,6 +9,7 @@ import com.personalsProjects.androidfundamentalsproject.data.repository.Persista
 import com.personalsProjects.androidfundamentalsproject.data.repository.models.Hero
 import com.personalsProjects.androidfundamentalsproject.databinding.ActivityHeroesBinding
 import com.personalsProjects.androidfundamentalsproject.ui.viewmodels.HeroesViewModel
+import com.personalsProjects.androidfundamentalsproject.ui.views.fragments.heroDetailFragment.HeroDetailFragment
 import com.personalsProjects.androidfundamentalsproject.ui.views.fragments.heroesListFragment.HeroesListFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,7 +39,6 @@ class HeroesActivity : AppCompatActivity() {
                     is HeroesViewModel.State.Idle -> idle()
                     is HeroesViewModel.State.Loading -> idle()
                     is HeroesViewModel.State.SuccesLoad -> showHeroes(state.heroes)
-                    else -> {}
                 }
             }
         }
@@ -49,6 +49,13 @@ class HeroesActivity : AppCompatActivity() {
         hideLoading()
         supportFragmentManager.beginTransaction()
             .replace(binding.mainContainer.id, HeroesListFragment(heroes))
+            .commit()
+    }
+
+    fun goToHeroDetailsFragment(){
+        supportFragmentManager.beginTransaction()
+            .replace(binding.mainContainer.id, HeroDetailFragment())
+            .addToBackStack(null)
             .commit()
     }
 
@@ -66,13 +73,8 @@ class HeroesActivity : AppCompatActivity() {
     }
 
 
-    /*
-        fun goToHeroDetailsFragment(){
-            supportFragmentManager.beginTransaction()
-                .replace(binding.mainContainer.id, HeroDetailsFragment())
-                .addToBackStack(null)
-                .commit()
-        }
-        */
+
+
+
 
 }

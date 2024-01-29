@@ -41,10 +41,11 @@ class HeroesListFragment(heroes: List<Hero>): Fragment(), MainAdapterCallback {
         //loadHeroes()
     }
 
-    override fun onHeroClicked(hero: Hero) {
-         Toast.makeText(requireContext(), "Pulsado ${hero.name}", Toast.LENGTH_LONG).show()
-    }
 
+
+    override fun onHeroClicked(hero: Hero) {
+        heroesViewModel.selectHero(hero)
+    }
 
     private fun setListeners() {
         binding.healButton.setOnClickListener{
@@ -73,17 +74,16 @@ class HeroesListFragment(heroes: List<Hero>): Fragment(), MainAdapterCallback {
                         adapter.notifyDataSetChanged()
                     }
                     is HeroesViewModel.StateHeroes.Idle -> {
-                        goToHeroDetails()
+                        //goToHeroDetails()
                     }
-
-                    else -> {}
                 }
             }
         }
     }
 
+
     private fun goToHeroDetails() {
-        //(activity as? HeroesActivity)?.goToHeroDetailsFragment()
+        (activity as? HeroesActivity)?.goToHeroDetailsFragment()
     }
 
     private fun showHeroes(heroes: List<Hero>) {
