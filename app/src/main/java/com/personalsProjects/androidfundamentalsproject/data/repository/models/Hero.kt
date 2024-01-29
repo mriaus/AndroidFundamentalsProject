@@ -7,4 +7,7 @@ data class Hero(
     val description: String,
     var currentHealth: Int = 100,
     val maxHealth: Int = 100
-)
+){
+    fun isAlive() = currentHealth > 0
+    var isSelected = false
+}

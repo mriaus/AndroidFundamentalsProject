@@ -16,8 +16,6 @@ import java.lang.Exception
 
 class MainActivityViewModel: ViewModel() {
 
-  private val BASE_URL = "https://dragonball.keepcoding.education"
-  private var token = ""
   private val _uiState = MutableStateFlow<State>(State.Idle())
   val uiState: StateFlow<State> = _uiState
 

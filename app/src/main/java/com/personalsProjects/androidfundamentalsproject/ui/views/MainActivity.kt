@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.lifecycleScope
-import com.personalsProjects.androidfundamentalsproject.characterList.ActivityCharactersList
 import com.personalsProjects.androidfundamentalsproject.data.repository.Persistance
 import com.personalsProjects.androidfundamentalsproject.databinding.ActivityHeroesBinding
 import com.personalsProjects.androidfundamentalsproject.databinding.ActivityMainBinding
@@ -43,6 +42,7 @@ class MainActivity : AppCompatActivity() {
                         is MainActivityViewModel.State.Error -> showError(state.message)
                         is MainActivityViewModel.State.Loading -> showLoading(true)
                         is MainActivityViewModel.State.SuccesLogin -> showSuccesLogin(state.token)
+                        else -> {}
                     }
             }
         }
