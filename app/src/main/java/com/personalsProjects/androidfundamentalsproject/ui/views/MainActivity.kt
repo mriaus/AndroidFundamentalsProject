@@ -1,4 +1,4 @@
-package com.personalsProjects.androidfundamentalsproject
+package com.personalsProjects.androidfundamentalsproject.ui.views
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,9 +10,11 @@ import androidx.activity.viewModels
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.lifecycleScope
 import com.personalsProjects.androidfundamentalsproject.characterList.ActivityCharactersList
+import com.personalsProjects.androidfundamentalsproject.data.repository.Persistance
+import com.personalsProjects.androidfundamentalsproject.databinding.ActivityHeroesBinding
 import com.personalsProjects.androidfundamentalsproject.databinding.ActivityMainBinding
+import com.personalsProjects.androidfundamentalsproject.ui.viewmodels.MainActivityViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -24,9 +26,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setObservers()
-        binding.button.setOnClickListener({viewModel.onPressLogin("","")
-           // ActivityCharactersList.goToCharactersList(this)
-        })
+        binding.button.setOnClickListener {
+            lifecycleScope.launch {
+                viewModel.onPressLogin(binding.editTextTextEmailAddress.text.toString(), binding.editTextTextPassword.text.toString())
+            }
+        }
         binding.editTextTextEmailAddress.doAfterTextChanged {  }
         binding.editTextTextPassword.doAfterTextChanged {  }
     }
@@ -38,21 +42,21 @@ class MainActivity : AppCompatActivity() {
                         is MainActivityViewModel.State.Idle -> idle()
                         is MainActivityViewModel.State.Error -> showError(state.message)
                         is MainActivityViewModel.State.Loading -> showLoading(true)
-                        is MainActivityViewModel.State.SuccesLogin -> showSuccesLogin()
+                        is MainActivityViewModel.State.SuccesLogin -> showSuccesLogin(state.token)
                     }
             }
         }
 
     }
 
-    private fun showSuccesLogin() {
-       // viewModel.onPressLogin("","")
-       // ActivityCharactersList.goToCharactersList(this)
+    private fun showSuccesLogin(token: String) {
+        showLoading(false)
+        Persistance.setToken(token, this)
+        val intent = Intent(this, HeroesActivity::class.java)
+        startActivity(intent)
     }
 
     private fun showLoading(show: Boolean) {
-        Log.println(Log.INFO,"Entra en showLoading()", "${show}")
-
         if (show) {
             binding.button.visibility = View.GONE
             binding.pbLoading.visibility = View.VISIBLE
@@ -64,13 +68,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showError(message: String) {
+        showLoading(false)
         Toast.makeText(this,message,Toast.LENGTH_LONG).show()
     }
 
     private fun idle(){
-        Log.println(Log.INFO,"Entra en Idle()", "")
-
-        // showLoading(false)
+        showLoading(false)
     }
+
+
 
 }
