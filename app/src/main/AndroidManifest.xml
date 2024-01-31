@@ -19,11 +19,6 @@
             android:name=".ui.views.HeroesActivity"
             android:exported="false" />
         <activity
-            android:name=".characterList.ActivityCharactersList"
-            android:exported="true"
-            android:label="@string/title_activity_characters_list"
-            android:theme="@style/Theme.AndroidFundamentalsProject" />
-        <activity
             android:name=".ui.views.MainActivity"
             android:exported="true">
             <intent-filter>

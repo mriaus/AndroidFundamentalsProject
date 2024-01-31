@@ -1,10 +1,12 @@
 package com.personalsProjects.androidfundamentalsproject.ui.viewmodels
 
+import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.personalsProjects.androidfundamentalsproject.data.repository.HeroRespository
+import com.personalsProjects.androidfundamentalsproject.data.repository.Persistance
 import com.personalsProjects.androidfundamentalsproject.data.repository.models.Hero
 
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -38,18 +40,21 @@ class HeroesViewModel: ViewModel() {
     }
 
     suspend fun getHeroes(token: String){
-        Log.d("TOKEN", "$token")
-
         viewModelScope.launch(Dispatchers.Main) {
             val heroes = async(Dispatchers.IO) {
                 HeroRespository().getHeroes(token = token)
             }.await()
                 heroList.addAll(heroes)
             _uiState.value = State.SuccesLoad(heroes)
-
-            Log.d("HeroesActivity", "Heroes obtenidos: $heroes")
          }
      }
+
+    fun healAll(){
+        heroList.forEach{
+            it.currentHealth = it.maxHealth
+        }
+        _stateHeroes.value = StateHeroes.OnHeroesUpdated
+    }
 
     fun selectHero(hero: Hero) {
         heroList.forEach {
@@ -83,11 +88,8 @@ class HeroesViewModel: ViewModel() {
 
         }
     }
-    fun setHeroes(heroes: List<Hero>) {
-        heroList.clear()
-        heroList.addAll(heroes)
-        //_stateHeroes.value = StateHeroes.OnHeroesReceived(heroes)
-    }
+
+
 
 private fun updateHero(hero: Hero) {
     _stateHeroDetails.value = if (hero.isAlive()) {

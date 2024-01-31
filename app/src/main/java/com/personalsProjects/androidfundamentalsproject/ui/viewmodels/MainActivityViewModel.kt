@@ -47,7 +47,6 @@ class MainActivityViewModel: ViewModel() {
             _uiState.value = State.SuccesLogin(result)
           }
         } else {
-          Log.d("ELSE", "$result")
           viewModelScope.launch(Dispatchers.Main) {
             _uiState.value = State.Error("Error al realizar el login")
           }

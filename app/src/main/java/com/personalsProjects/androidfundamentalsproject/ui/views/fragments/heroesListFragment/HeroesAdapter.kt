@@ -1,10 +1,11 @@
 package com.personalsProjects.androidfundamentalsproject.ui.views.fragments.heroesListFragment
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getString
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.personalsProjects.androidfundamentalsproject.R
@@ -41,9 +42,10 @@ class HeroesAdapter(private val callback: MainAdapterCallback): RecyclerView.Ada
                     if (item.isAlive()) {
                         callback.onHeroClicked(item)
                     } else {
+                        //TODO Revisar el texto
                         Toast.makeText(
                             binding.root.context,
-                            String.format("Muelto", item.name),
+                            String.format("El heroe no puede pelear", item.name),
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -57,8 +59,6 @@ class HeroesAdapter(private val callback: MainAdapterCallback): RecyclerView.Ada
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        Log.d("Adapter", "Hace el onCreateViewHolder")
-
         return MainViewHolder(
             ItemHeroBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false)
@@ -71,7 +71,6 @@ class HeroesAdapter(private val callback: MainAdapterCallback): RecyclerView.Ada
 
     fun updateList(list: List<Hero>) {
         items = list
-        Log.d("Adapter", "Hace el update list")
         notifyDataSetChanged()
     }
 }

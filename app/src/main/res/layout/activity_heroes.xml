@@ -29,7 +29,7 @@
         android:id="@+id/textViewLoading"
         android:layout_width="229dp"
         android:layout_height="63dp"
-        android:text="Cargando..."
+        android:text="@string/loading"
         android:textSize="24sp"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"

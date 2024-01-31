@@ -3,4 +3,11 @@
     <string name="app_name">AndroidFundamentals</string>
     <string name="loginBackgroundImage">A background image with the dragon ball characters</string>
     <string name="exit">Log out</string>
+    <string name="login">Log in</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="loading">Loading...</string>
+    <string name="heal_all">Heal all</string>
+    <string name="placeholder_name">Name</string>
+    <string name="diedHero">The hero has died</string>
 </resources>

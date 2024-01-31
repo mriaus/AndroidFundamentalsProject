@@ -43,7 +43,7 @@
             android:layout_weight="1"
             android:background="@drawable/square_button_bg"
             app:backgroundTint="@color/jade"
-            android:text="Curar todos"
+            android:text="@string/heal_all"
              />
 
     </LinearLayout>

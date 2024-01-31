@@ -3,14 +3,12 @@ package com.personalsProjects.androidfundamentalsproject.ui.views
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.lifecycleScope
 import com.personalsProjects.androidfundamentalsproject.data.repository.Persistance
-import com.personalsProjects.androidfundamentalsproject.databinding.ActivityHeroesBinding
 import com.personalsProjects.androidfundamentalsproject.databinding.ActivityMainBinding
 import com.personalsProjects.androidfundamentalsproject.ui.viewmodels.MainActivityViewModel
 import kotlinx.coroutines.Dispatchers
@@ -30,8 +28,6 @@ class MainActivity : AppCompatActivity() {
                 viewModel.onPressLogin(binding.editTextTextEmailAddress.text.toString(), binding.editTextTextPassword.text.toString())
             }
         }
-        binding.editTextTextEmailAddress.doAfterTextChanged {  }
-        binding.editTextTextPassword.doAfterTextChanged {  }
     }
 
     private fun setObservers() {
@@ -42,7 +38,6 @@ class MainActivity : AppCompatActivity() {
                         is MainActivityViewModel.State.Error -> showError(state.message)
                         is MainActivityViewModel.State.Loading -> showLoading(true)
                         is MainActivityViewModel.State.SuccesLogin -> showSuccesLogin(state.token)
-                        else -> {}
                     }
             }
         }

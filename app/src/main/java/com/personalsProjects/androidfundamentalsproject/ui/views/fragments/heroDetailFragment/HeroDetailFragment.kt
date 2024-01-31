@@ -1,16 +1,14 @@
 package com.personalsProjects.androidfundamentalsproject.ui.views.fragments.heroDetailFragment
 
-import android.graphics.BlendMode
-import android.graphics.Color
+
 import android.graphics.PorterDuff
+import android.media.MediaPlayer
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.blue
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -18,7 +16,6 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.personalsProjects.androidfundamentalsproject.R
 import com.personalsProjects.androidfundamentalsproject.data.repository.models.Hero
-import com.personalsProjects.androidfundamentalsproject.databinding.FragmentCharactersListBinding
 import com.personalsProjects.androidfundamentalsproject.databinding.FragmentDetailHeroBinding
 import com.personalsProjects.androidfundamentalsproject.ui.viewmodels.HeroesViewModel
 import kotlinx.coroutines.launch
@@ -26,20 +23,21 @@ import kotlinx.coroutines.launch
 class HeroDetailFragment(): Fragment() {
     private lateinit var binding : FragmentDetailHeroBinding
     private val heroesViewModel: HeroesViewModel by activityViewModels()
-
+    private lateinit var mediaPlayer: MediaPlayer
+    private lateinit var mediaPlayerHeal: MediaPlayer
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDetailHeroBinding.inflate(inflater)
+        mediaPlayer = MediaPlayer.create(this.requireContext(), R.raw.punch)
+        mediaPlayerHeal = MediaPlayer.create(this.requireContext(), R.raw.heal)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("HeroesFragment", "Hace el onViewCreated")
         setListeners()
         setObservers()
     }
@@ -56,7 +54,7 @@ class HeroDetailFragment(): Fragment() {
                         displayHero(stateHeroDetails.heroSelected)
                     }
                     is HeroesViewModel.StateHeroDetails.OnHeroDied -> {
-                        Toast.makeText(requireContext(), "Muelto", Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), "${getString(R.string.diedHero)}", Toast.LENGTH_LONG).show()
                         parentFragmentManager.popBackStack()
                     }
                     HeroesViewModel.StateHeroDetails.Idle -> Unit
@@ -107,9 +105,11 @@ class HeroDetailFragment(): Fragment() {
 
     private fun setListeners() {
         binding.buttonHeal.setOnClickListener {
+            mediaPlayerHeal.start()
             heroesViewModel.heal()
         }
         binding.buttonHit.setOnClickListener {
+            mediaPlayer.start()
             heroesViewModel.receiveDmg()
         }
     }

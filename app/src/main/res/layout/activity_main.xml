@@ -26,7 +26,7 @@
         android:autofillHints="emailAddress"
         android:background="@color/white_transparent"
         android:ems="10"
-        android:hint="Email"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:padding="8dp"
         android:singleLine="true"
@@ -44,7 +44,7 @@
         android:layout_height="62dp"
         android:background="@color/white_transparent"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -52,14 +52,15 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintVertical_bias="0.16000003" />
+        app:layout_constraintVertical_bias="0.16000003"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="180dp"
         android:layout_height="69dp"
         android:backgroundTint="@color/orange"
-        android:text="Login"
+        android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
