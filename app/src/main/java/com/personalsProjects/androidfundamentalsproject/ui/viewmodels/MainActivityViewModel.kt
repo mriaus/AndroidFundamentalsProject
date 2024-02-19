@@ -1,11 +1,9 @@
 package com.personalsProjects.androidfundamentalsproject.ui.viewmodels
 
-import android.content.Context
-import android.util.Log
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.personalsProjects.androidfundamentalsproject.LOGIN_ERROR
-import com.personalsProjects.androidfundamentalsproject.data.repository.Persistance
 import com.personalsProjects.androidfundamentalsproject.data.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -26,13 +24,6 @@ class MainActivityViewModel: ViewModel() {
     class SuccesLogin(val token: String) : State()
   }
 
-  fun onEmailChange() {
-
-  }
-
-  fun onPasswordChange() {
-
-  }
 
   suspend fun onPressLogin(user: String, password: String) {
     viewModelScope.launch(Dispatchers.Main) {

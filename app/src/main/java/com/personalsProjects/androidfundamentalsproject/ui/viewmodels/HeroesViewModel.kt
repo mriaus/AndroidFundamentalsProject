@@ -29,7 +29,7 @@ class HeroesViewModel: ViewModel() {
     private val _uiState = MutableStateFlow<HeroesViewModel.State>(HeroesViewModel.State.Idle())
     val uiState: StateFlow<HeroesViewModel.State> = _uiState
 
-     private var heroList = mutableListOf<Hero>()
+    var heroList = mutableListOf<Hero>()
 
 
     sealed class State {
@@ -41,12 +41,12 @@ class HeroesViewModel: ViewModel() {
 
     suspend fun getHeroes(token: String){
         viewModelScope.launch(Dispatchers.Main) {
-            val heroes = async(Dispatchers.IO) {
-                HeroRespository().getHeroes(token = token)
-            }.await()
-                heroList.addAll(heroes)
-            _uiState.value = State.SuccesLoad(heroes)
-         }
+                val heroes = async(Dispatchers.IO) {
+                    HeroRespository().getHeroes(token = token)
+                }.await()
+                    heroList.addAll(heroes)
+                    _uiState.value = State.SuccesLoad(heroes)
+        }
      }
 
     fun healAll(){

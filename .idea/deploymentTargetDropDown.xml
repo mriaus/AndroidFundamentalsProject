@@ -18,6 +18,15 @@
           <timeTargetWasSelectedWithDropDown value="2024-01-30T14:56:13.132551Z" />
         </State>
       </entry>
+      <entry key="testDamageInRange()">
+        <State />
+      </entry>
+      <entry key="testHealAll()">
+        <State />
+      </entry>
+      <entry key="testHealHero()">
+        <State />
+      </entry>
     </value>
   </component>
 </project>
