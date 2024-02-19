@@ -54,7 +54,7 @@ class HeroDetailFragment(): Fragment() {
                         displayHero(stateHeroDetails.heroSelected)
                     }
                     is HeroesViewModel.StateHeroDetails.OnHeroDied -> {
-                        Toast.makeText(requireContext(), "${getString(R.string.diedHero)}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), getString(R.string.diedHero), Toast.LENGTH_LONG).show()
                         parentFragmentManager.popBackStack()
                     }
                     HeroesViewModel.StateHeroDetails.Idle -> Unit
@@ -72,6 +72,8 @@ class HeroDetailFragment(): Fragment() {
                 .centerCrop()
                 .placeholder(R.drawable.sleeping_goku)
                 .into(binding.imageView2)
+
+            textView.text = heroSelected.name
             progressBar2.progress = heroSelected.currentHealth
 
             textViewLife.text = "${heroSelected.currentHealth}/${heroSelected.maxHealth} HP"

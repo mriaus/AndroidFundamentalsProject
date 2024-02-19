@@ -10,4 +10,6 @@
     <string name="heal_all">Heal all</string>
     <string name="placeholder_name">Name</string>
     <string name="diedHero">The hero has died</string>
+    <string name="hit_button">Hit button</string>
+    <string name="heal_button">heal button</string>
 </resources>

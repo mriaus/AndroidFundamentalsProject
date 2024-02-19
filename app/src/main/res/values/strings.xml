@@ -14,6 +14,8 @@
     <string name="second_fragment_label" translatable="false">Second Fragment</string>
     <string name="next" translatable="false">Next</string>
     <string name="previous" translatable="false">Previous</string>
-    <string name="diedHero">El heroe ha caido</string>
+    <string name="diedHero">El héroe ha caido</string>
+    <string name="hit_button">Botón de golpear</string>
+    <string name="heal_button">Botón de curar</string>
 
 </resources>
